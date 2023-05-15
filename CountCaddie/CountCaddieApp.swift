@@ -11,7 +11,11 @@ import SwiftUI
 struct CountCaddieApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView{
+                HomePageView()
+            }
         }
     }
 }
+
+

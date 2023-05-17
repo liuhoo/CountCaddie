@@ -11,6 +11,11 @@
 		5F76D7582A11C1E100DD858D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F76D7572A11C1E100DD858D /* Assets.xcassets */; };
 		5F76D75B2A11C1E100DD858D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F76D75A2A11C1E100DD858D /* Preview Assets.xcassets */; };
 		5F7D45892A11F1D900259077 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D45882A11F1D900259077 /* HomePageView.swift */; };
+		5F7D458B2A13339600259077 /* RoundCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D458A2A13339600259077 /* RoundCollectionView.swift */; };
+		5F7D458E2A133CD100259077 /* ScorecardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D458D2A133CD100259077 /* ScorecardModel.swift */; };
+		5F7D45902A134C3500259077 /* HoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D458F2A134C3500259077 /* HoleView.swift */; };
+		5F7D45922A14074800259077 /* CollectDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D45912A14074800259077 /* CollectDataView.swift */; };
+		5F7D459E2A14986C00259077 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D459D2A14986C00259077 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,11 @@
 		5F76D7572A11C1E100DD858D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F76D75A2A11C1E100DD858D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5F7D45882A11F1D900259077 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
+		5F7D458A2A13339600259077 /* RoundCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundCollectionView.swift; sourceTree = "<group>"; };
+		5F7D458D2A133CD100259077 /* ScorecardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorecardModel.swift; sourceTree = "<group>"; };
+		5F7D458F2A134C3500259077 /* HoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleView.swift; sourceTree = "<group>"; };
+		5F7D45912A14074800259077 /* CollectDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectDataView.swift; sourceTree = "<group>"; };
+		5F7D459D2A14986C00259077 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +62,9 @@
 			isa = PBXGroup;
 			children = (
 				5F76D7532A11C1E000DD858D /* CountCaddieApp.swift */,
+				5F7D458C2A133CB200259077 /* Models */,
 				5F7D45872A11F1B700259077 /* Views */,
+				5F7D459C2A14980A00259077 /* ViewModels */,
 				5F76D7572A11C1E100DD858D /* Assets.xcassets */,
 				5F76D7592A11C1E100DD858D /* Preview Content */,
 			);
@@ -71,8 +83,27 @@
 			isa = PBXGroup;
 			children = (
 				5F7D45882A11F1D900259077 /* HomePageView.swift */,
+				5F7D458A2A13339600259077 /* RoundCollectionView.swift */,
+				5F7D458F2A134C3500259077 /* HoleView.swift */,
+				5F7D45912A14074800259077 /* CollectDataView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		5F7D458C2A133CB200259077 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5F7D458D2A133CD100259077 /* ScorecardModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5F7D459C2A14980A00259077 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5F7D459D2A14986C00259077 /* ViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,8 +176,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F7D45922A14074800259077 /* CollectDataView.swift in Sources */,
 				5F7D45892A11F1D900259077 /* HomePageView.swift in Sources */,
 				5F76D7542A11C1E000DD858D /* CountCaddieApp.swift in Sources */,
+				5F7D458E2A133CD100259077 /* ScorecardModel.swift in Sources */,
+				5F7D458B2A13339600259077 /* RoundCollectionView.swift in Sources */,
+				5F7D45902A134C3500259077 /* HoleView.swift in Sources */,
+				5F7D459E2A14986C00259077 /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

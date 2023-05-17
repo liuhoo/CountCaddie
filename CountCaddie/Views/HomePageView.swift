@@ -9,23 +9,12 @@ import SwiftUI
 
 struct HomePageView: View {
     var body: some View {
-        
-        
-            VStack {
-                NavigationLink(destination: Text("ScoreCard")){NewRoundView()}.navigationTitle("Count Caddie")
-                NavigationLink(destination: Text("In Depth Statistics")){StatisticView()}.navigationTitle("Count Caddie")
-               
-                
-            }
-        
-        
-            
-        
-    
-        
+        VStack {
+            NavigationLink(destination: CollectDataView()){NewRoundView()}.navigationTitle("Count Caddie")
+            NavigationLink(destination: RoundCollectionView()){StatisticView()}.navigationTitle("Count Caddie")
+        }
     }
 }
-
 
 struct StatisticView: View {
     var body: some View {
@@ -48,7 +37,6 @@ struct NewRoundView: View {
         .padding(.horizontal)
     }
 }
-
 
 struct HomePageView_Previews: PreviewProvider {
     static var previews: some View {

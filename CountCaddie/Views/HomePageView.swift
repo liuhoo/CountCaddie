@@ -8,10 +8,25 @@
 import SwiftUI
 
 struct HomePageView: View {
+    @EnvironmentObject var vm: ViewModel
     var body: some View {
         VStack {
-            NavigationLink(destination: CollectDataView()){NewRoundView()}.navigationTitle("Count Caddie")
+            ForEach(vm.roundList[0..<vm.numberRounds()],  id: \.self) { i in
+                Text("HERE WE ARE AT\(i.id)")
+            }
+            
+            NavigationLink(destination: intermediateView()){NewRoundView()}.navigationTitle("Count Caddie").simultaneousGesture(TapGesture().onEnded{
+                vm.addRound(value: "BHCC 10/18", desc: "HERE")
+            })
+            
+            
+            
             NavigationLink(destination: RoundCollectionView()){StatisticView()}.navigationTitle("Count Caddie")
+            
+            
+            
+            
+            
         }
     }
 }

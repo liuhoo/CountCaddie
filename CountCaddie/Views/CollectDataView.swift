@@ -10,27 +10,27 @@ import SwiftUI
 struct CollectDataView: View {
     @State var ParStepper: Int = 0
     @State var ScoreStepper: Int = 0
-//    var data = ScorecardModel(id: 1, name: "New Round", description: "Testing")
-    
-    
-    @StateObject private var vm = ViewModel()
-    
+    @EnvironmentObject var vm: ViewModel
+//    var curRound: Int = 0
     var body: some View {
-        
+        let element = vm.numberRounds()-1
+//        let holes = vm.getHoles(index: curRound)
+        var currRound = vm.getRound(index: element)
         VStack(alignment: .center, spacing:0){
             
             ZStack{
-                
+
                 LazyVGrid(columns: [GridItem(),GridItem(),GridItem()]){
-                    ForEach(1..<19) {i in
-                        NavigationLink(destination: Text("\(i)")){HoleSelectView(HoleNumber: i)}.navigationTitle("Hole Number")
+                    ForEach(currRound.holes[0..<currRound.holes.count], id: \.self) {i in
+                        NavigationLink(destination: Text("HERE")){HoleSelectView(HoleNumber: i.id)}.navigationTitle("Hole Number")
                     }
                 }.padding().cornerRadius(20).overlay(RoundedRectangle(cornerRadius: 10).inset(by: -10).strokeBorder(lineWidth: 1 ).padding(.all))
-                
-                
+
+
             }.frame(maxHeight: UIScreen.main.bounds.size.height/4)
             
-            
+//            Text("\(vm.getRound(index : element).id)")
+//            Text("\(vm.numberRounds())")
             List{
                 HStack{
                     Stepper("Par: \(ParStepper)", value: $ParStepper)
@@ -53,7 +53,7 @@ struct CollectDataView: View {
                     Button{}label: {  Image(systemName: "checkmark.square")}
                     
                 }.font(.title2)
-                ForEach(vm.getHole(index: 0, holeNo: 1).Putts) {putt in
+                ForEach(vm.getHole(index: element, holeNo: 1).Putts) {putt in
                     HStack{
                         Text("Putt").font(.body)
                         Spacer()
@@ -105,6 +105,18 @@ struct HoleSelectView: View {
             Text("\(HoleNumber)").font(.body)
         }.padding(.horizontal)
         
+    }
+}
+
+struct intermediateView: View{
+    @StateObject private var vm = ViewModel()
+    var body: some View {
+        VStack {
+            
+            
+            NavigationLink(destination: CollectDataView()){NewRoundView()}.navigationTitle("New Round")
+           
+        }
     }
 }
 

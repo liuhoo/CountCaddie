@@ -9,11 +9,12 @@ import SwiftUI
 
 @main
 struct CountCaddieApp: App {
+    @StateObject var vm : ViewModel = ViewModel()
     var body: some Scene {
         WindowGroup {
             NavigationView{
                 HomePageView()
-            }
+            }.environmentObject(vm)
         }
     }
 }

@@ -27,7 +27,6 @@ class ViewModel: ObservableObject{
         roundList.append(contentsOf: newItems)
     }
     
-    
     func numberRounds() -> Int {
         return roundList.count
     }
@@ -50,12 +49,13 @@ class ViewModel: ObservableObject{
     func addHole(round: Int, id: Int, FairwayHit: Bool, GreenHit: String, Score: Int){
         let newHole = ScorecardModel.HoleModel(id: id, FairwayHit: FairwayHit, GreenHit: GreenHit, Score: Score)
         roundList[round].holes.append(newHole)
-        
     }
     
-    func addPutt(){
-        
-    }
+//    IMPLEMENT
+//    func addPutt(){
+//
+//    }
+    
     func addRound(value: String, desc: String) -> Void {
         let newRound = ScorecardModel(id: value , description: desc, holes: [ScorecardModel.HoleModel(id: 1, FairwayHit: true, GreenHit: "True", Score: 4, Par: 4)])
         roundList.append(newRound)

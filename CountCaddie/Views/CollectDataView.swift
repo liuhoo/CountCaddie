@@ -15,9 +15,9 @@ struct CollectDataView: View {
     var body: some View {
         let element = vm.numberRounds()-1
 //        let holes = vm.getHoles(index: curRound)
-        var currRound = vm.getRound(index: element)
+        let currRound = vm.getRound(index: element)
         VStack(alignment: .center, spacing:0){
-            
+            Text("\(currRound.id)")
             ZStack{
 
                 LazyVGrid(columns: [GridItem(),GridItem(),GridItem()]){
@@ -96,7 +96,6 @@ struct CollectDataView: View {
     }
 }
 
-
 struct HoleSelectView: View {
     var HoleNumber: Int
     var body: some View {
@@ -105,18 +104,6 @@ struct HoleSelectView: View {
             Text("\(HoleNumber)").font(.body)
         }.padding(.horizontal)
         
-    }
-}
-
-struct intermediateView: View{
-    @StateObject private var vm = ViewModel()
-    var body: some View {
-        VStack {
-            
-            
-            NavigationLink(destination: CollectDataView()){NewRoundView()}.navigationTitle("New Round")
-           
-        }
     }
 }
 

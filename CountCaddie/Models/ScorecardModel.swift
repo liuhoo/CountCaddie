@@ -15,10 +15,10 @@ struct ScorecardModel: Hashable, Codable, Identifiable {
     
     struct HoleModel: Hashable, Codable, Identifiable{
         var id: Int
-        var FairwayHit: Bool
-        var GreenHit: String
+        var FairwayHit: Bool?
+        var GreenHit: String?
         var Putts = [Putt]()
-        var Score: Int
+        var Score: Int?
         var Par: Int = 0
         struct Putt: Hashable, Codable, Identifiable{
             var id: Int

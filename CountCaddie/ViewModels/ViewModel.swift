@@ -21,9 +21,9 @@ class ViewModel: ObservableObject{
     
     func getItems(){
         let newItems = [ScorecardModel(id: "BHCC 10/17", description: "Test Round", holes: [ScorecardModel.HoleModel(id: 1, FairwayHit: true, GreenHit: "True", Putts: [ScorecardModel.HoleModel.Putt(id:1, Break: "LR", Miss: "F", Make: true)], Score: 4, Par: 4),
-                                                                                           ScorecardModel.HoleModel(id: 2,FairwayHit: false, GreenHit: "True", Putts: [ScorecardModel.HoleModel.Putt(id:1, Break: "RL", Miss: "F", Make: false), ScorecardModel.HoleModel.Putt(id:1, Break: "LR", Miss: "F", Make: true)], Score: 4, Par: 4),
+                                                                                           ScorecardModel.HoleModel(id: 2,FairwayHit: false, GreenHit: "True", Putts: [ScorecardModel.HoleModel.Putt(id:1, Break: "RL", Miss: "F", Make: false), ScorecardModel.HoleModel.Putt(id:2, Break: "LR", Miss: "F", Make: true)], Score: 4, Par: 4),
                                                                                            ScorecardModel.HoleModel(id: 3,FairwayHit: true, GreenHit: "check", Putts: [ScorecardModel.HoleModel.Putt(id:1, Break: "LR", Miss: "F", Make: true)], Score: 4, Par: 4),
-                                                                                           ScorecardModel.HoleModel(id: 4,FairwayHit: true, GreenHit: "True", Putts: [ScorecardModel.HoleModel.Putt(id:1, Break: "RL", Miss: "F", Make: false), ScorecardModel.HoleModel.Putt(id:1, Break: "LR", Miss: "F", Make: true)], Score: 4, Par: 4)])]
+                                                                                           ScorecardModel.HoleModel(id: 4,FairwayHit: true, GreenHit: "True", Putts: [ScorecardModel.HoleModel.Putt(id:1, Break: "RL", Miss: "F", Make: false), ScorecardModel.HoleModel.Putt(id:2, Break: "LR", Miss: "F", Make: true)], Score: 4, Par: 4)])]
         roundList.append(contentsOf: newItems)
     }
     
@@ -32,7 +32,6 @@ class ViewModel: ObservableObject{
     }
     
     func getRound(index: Int) -> ScorecardModel{
-        print("COUNT HERE \(roundList.count)")
         return roundList[index]
     }
     
@@ -42,7 +41,7 @@ class ViewModel: ObservableObject{
     
     
     func getHole(index: Int, holeNo: Int) -> ScorecardModel.HoleModel{
-        return roundList[index].holes[holeNo-1]
+        return roundList[index].holes[holeNo]
     }
     
    
@@ -51,13 +50,17 @@ class ViewModel: ObservableObject{
         roundList[round].holes.append(newHole)
     }
     
-//    IMPLEMENT
-//    func addPutt(){
-//
-//    }
+    func addPutt(round: Int, hole: Int, identification: Int){
+        let newPutt = ScorecardModel.HoleModel.Putt(id: identification)
+        roundList[round].holes[hole].Putts.append(newPutt)
+    }
     
-    func addRound(value: String, desc: String) -> Void {
-        let newRound = ScorecardModel(id: value , description: desc, holes: [ScorecardModel.HoleModel(id: 1, FairwayHit: true, GreenHit: "True", Score: 4, Par: 4)])
+    func addRound(value: String, desc: String, noholes: Int) -> Void {
+        var newRound = ScorecardModel(id: value , description: desc, holes: [])
+        
+        for i in 1...noholes {
+            newRound.holes.append(ScorecardModel.HoleModel(id: i))
+        }
         roundList.append(newRound)
     }
     

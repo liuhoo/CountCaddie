@@ -16,13 +16,15 @@ struct CollectDataView: View {
         let element = vm.numberRounds()-1
 //        let holes = vm.getHoles(index: curRound)
         let currRound = vm.getRound(index: element)
+        var holeNo = 0
+        var currHole = currRound.holes[holeNo]
+        var numPutts = currHole.Putts.count
         VStack(alignment: .center, spacing:0){
-            Text("\(currRound.id)")
             ZStack{
 
                 LazyVGrid(columns: [GridItem(),GridItem(),GridItem()]){
                     ForEach(currRound.holes[0..<currRound.holes.count], id: \.self) {i in
-                        NavigationLink(destination: Text("HERE")){HoleSelectView(HoleNumber: i.id)}.navigationTitle("Hole Number")
+                        NavigationLink(destination: Text("HERE")){HoleSelectView(HoleNumber: i.id)}.navigationTitle("\(currRound.id)")
                     }
                 }.padding().cornerRadius(20).overlay(RoundedRectangle(cornerRadius: 10).inset(by: -10).strokeBorder(lineWidth: 1 ).padding(.all))
 
@@ -53,9 +55,12 @@ struct CollectDataView: View {
                     Button{}label: {  Image(systemName: "checkmark.square")}
                     
                 }.font(.title2)
-                ForEach(vm.getHole(index: element, holeNo: 1).Putts) {putt in
+                ForEach(vm.getHole(index: element, holeNo: holeNo).Putts) {putt in
+                    
                     HStack{
-                        Text("Putt").font(.body)
+//                        Text("Putt").font(.body)
+                        Text("Putt #\(putt.id+1)").font(.body)
+                       
                         Spacer()
                         Button{}label: {  Image(systemName: "arrow.uturn.left.circle")}
                         Button{}label: {  Image(systemName: "arrow.up.circle")}
@@ -70,7 +75,7 @@ struct CollectDataView: View {
                     }.font(.title3)
                 }
                 HStack{
-                    Text("Putt").font(.body)
+                    Text("New Putt").font(.body)
                     Spacer()
                     Button{}label: {  Image(systemName: "arrow.uturn.left.circle")}
                     Button{}label: {  Image(systemName: "arrow.up.circle")}
@@ -85,7 +90,10 @@ struct CollectDataView: View {
                 }.font(.title3)
                 HStack{
                     Spacer()
-                    Button{}label: {  HStack{Text("Add Putt");Image(systemName: "plus.rectangle")}}
+                    Button{
+                        vm.addPutt(round: element, hole: holeNo, identification: numPutts )
+                        numPutts = numPutts + 1
+                    }label: {  HStack{Text("Add Putt");Image(systemName: "plus.rectangle")}}
                     Spacer()
                 }.font(.title2)
         

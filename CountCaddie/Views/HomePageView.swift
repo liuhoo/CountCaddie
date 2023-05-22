@@ -135,7 +135,7 @@ struct intermediateView: View{
                 }
             }
             NavigationLink(destination: CollectDataView()){BeginRoundView()}.navigationTitle("New Round").simultaneousGesture(TapGesture().onEnded{
-                vm.addRound(value: id, desc: desc)
+                vm.addRound(value: id, desc: desc, noholes: Int(speed))
             })
 
         }

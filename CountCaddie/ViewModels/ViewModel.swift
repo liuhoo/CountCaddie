@@ -45,7 +45,7 @@ class ViewModel: ObservableObject{
     }
     
    
-    func addHole(roundNo index: Int, id: Int, FairwayHit: String, GreenHit: Bool, Score: Int){
+    func addHole(roundNo index: Int, id: Int, FairwayHit: String, GreenHit: String, Score: Int){
         let newHole = ScorecardModel.HoleModel(id: id, FairwayHit: FairwayHit, GreenHit: GreenHit, Score: Score)
         roundList[index].holes.append(newHole)
     }
@@ -87,6 +87,20 @@ class ViewModel: ObservableObject{
     }
     func getFairway(roundNo index: Int, hole: Int) -> String{
         return roundList[index].holes[hole].FairwayHit ?? ""
+    }
+    
+    func updateGreenHit(roundNo index: Int, hole: Int, state: String) -> Void{
+        roundList[index].holes[hole].GreenHit = state
+    }
+    func getGreenHit(roundNo index: Int, hole: Int) -> String{
+        return roundList[index].holes[hole].GreenHit ?? ""
+    }
+    
+    func updateUpDown(roundNo index: Int, hole: Int, state: String) -> Void{
+        roundList[index].holes[hole].UpDown = state
+    }
+    func getUpDown(roundNo index: Int, hole: Int) -> String{
+        return roundList[index].holes[hole].UpDown ?? ""
     }
     
     

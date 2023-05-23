@@ -61,20 +61,9 @@ struct CollectDataView: View {
                         if vm.getPar(roundNo: element, hole: holeNo) < 0 { vm.incrementPar(roundNo : element, hole: holeNo)}
                     }
                 }
-                HStack{
-                    Text("Fairway?").font(.body)
-                    Spacer()
-                    Button{vm.updateFairway(roundNo: element, hole: holeNo, state: "L")}label: {  Image(systemName: "arrow.up.left.circle")}
-                    Button{vm.updateFairway(roundNo: element, hole: holeNo, state: "H")}label: {  Image(systemName: "checkmark.circle")}
-                    Button{vm.updateFairway(roundNo: element, hole: holeNo, state: "R")}label: {  Image(systemName: "arrow.up.right.circle")}
-                }.font(.title2)
-                HStack{
-                    Text("Up and Down?").font(.body)
-                    Spacer()
-                    Button{}label: {  Image(systemName: "x.square")}
-                    Button{}label: {  Image(systemName: "checkmark.square")}
-                    
-                }.font(.title2)
+                FairwayButton(roundNumber: element, holeNo: holeNo)
+                UpDownButton(roundNumber: element, holeNo: holeNo)
+                GreenHitButton(roundNumber: element, holeNo: holeNo)
                 ForEach(vm.getHole(index: element, holeNo: holeNo).Putts) {putt in
                     
                     HStack{
@@ -84,7 +73,7 @@ struct CollectDataView: View {
                         Button{}label: {  Image(systemName: "arrow.up.circle")}
                         Button{}label: {  Image(systemName: "arrow.uturn.right.circle")}
 
-                        Button{}label: {  Image(systemName: "pause")}
+                        Text("|")
 
                         Button{}label: {  Image(systemName: "arrow.up.left.circle")}
                         Button{}label: {  Image(systemName: "arrow.up.right.circle")}
@@ -99,7 +88,7 @@ struct CollectDataView: View {
                     Button{}label: {  Image(systemName: "arrow.up.circle")}
                     Button{}label: {  Image(systemName: "arrow.uturn.right.circle")}
                     
-                    Button{}label: {  Image(systemName: "pause")}
+                    Text("|")
                   
                     Button{}label: {  Image(systemName: "arrow.up.left.circle")}
                     Button{}label: {  Image(systemName: "arrow.up.right.circle")}
@@ -119,6 +108,83 @@ struct CollectDataView: View {
         }
     }
 }
+
+struct FairwayButton: View {
+    @EnvironmentObject var vm: ViewModel
+    var roundNumber: Int
+    var holeNo: Int
+    var body: some View {
+        HStack{
+            Text("Fairway?").font(.body)
+            Spacer()
+            switch vm.getFairway(roundNo: roundNumber, hole: holeNo) {
+            case "L":
+                Button{vm.updateFairway(roundNo: roundNumber, hole: holeNo, state: "L")}label: {  Image(systemName: "arrow.up.left.circle.fill")}
+                Button{vm.updateFairway(roundNo: roundNumber, hole: holeNo, state: "H")}label: {  Image(systemName: "checkmark.circle")}
+                Button{vm.updateFairway(roundNo: roundNumber, hole: holeNo, state: "R")}label: {  Image(systemName: "arrow.up.right.circle")}
+            case "H":
+                Button{vm.updateFairway(roundNo: roundNumber, hole: holeNo, state: "L")}label: {  Image(systemName: "arrow.up.left.circle")}
+                Button{vm.updateFairway(roundNo: roundNumber, hole: holeNo, state: "H")}label: {  Image(systemName: "checkmark.circle.fill")}
+                Button{vm.updateFairway(roundNo: roundNumber, hole: holeNo, state: "R")}label: {  Image(systemName: "arrow.up.right.circle")}
+            case "R":
+                Button{vm.updateFairway(roundNo: roundNumber, hole: holeNo, state: "L")}label: {  Image(systemName: "arrow.up.left.circle")}.buttonStyle(.borderless)
+                Button{vm.updateFairway(roundNo: roundNumber, hole: holeNo, state: "H")}label: {  Image(systemName: "checkmark.circle")}
+                Button{vm.updateFairway(roundNo: roundNumber, hole: holeNo, state: "R")}label: {  Image(systemName: "arrow.up.right.circle.fill")}
+            default:
+                Button{vm.updateFairway(roundNo: roundNumber, hole: holeNo, state: "L")}label: {  Image(systemName: "arrow.up.left.circle")}
+                Button{vm.updateFairway(roundNo: roundNumber, hole: holeNo, state: "H")}label: {  Image(systemName: "checkmark.circle")}
+                Button{vm.updateFairway(roundNo: roundNumber, hole: holeNo, state: "R")}label: {  Image(systemName: "arrow.up.right.circle")}
+            }
+        }.font(.title2).buttonStyle(.borderless)
+    }
+}
+
+struct GreenHitButton: View {
+    @EnvironmentObject var vm: ViewModel
+    var roundNumber: Int
+    var holeNo: Int
+    var body: some View {
+        HStack{
+            Text("Green Hit?").font(.body)
+            Spacer()
+            switch vm.getGreenHit(roundNo: roundNumber, hole: holeNo) {
+            case "Y":
+                Button{vm.updateGreenHit(roundNo: roundNumber, hole: holeNo, state: "N")}label: {  Image(systemName: "x.square")}
+                Button{vm.updateGreenHit(roundNo: roundNumber, hole: holeNo, state: "Y")}label: {  Image(systemName: "checkmark.square.fill")}
+            case "N":
+                Button{vm.updateGreenHit(roundNo: roundNumber, hole: holeNo, state: "N")}label: {  Image(systemName: "x.square.fill")}
+                Button{vm.updateGreenHit(roundNo: roundNumber, hole: holeNo, state: "Y")}label: {  Image(systemName: "checkmark.square")}
+            default:
+                Button{vm.updateGreenHit(roundNo: roundNumber, hole: holeNo, state: "N")}label: {  Image(systemName: "x.square")}
+                Button{vm.updateGreenHit(roundNo: roundNumber, hole: holeNo, state: "Y")}label: {  Image(systemName: "checkmark.square")}
+            }
+        }.font(.title2).buttonStyle(.borderless)
+    }
+}
+struct UpDownButton: View {
+    @EnvironmentObject var vm: ViewModel
+    var roundNumber: Int
+    var holeNo: Int
+    var body: some View {
+        HStack{
+            Text("Up and Down?").font(.body)
+            Spacer()
+            switch vm.getUpDown(roundNo: roundNumber, hole: holeNo) {
+            case "Y":
+                Button{vm.updateUpDown(roundNo: roundNumber, hole: holeNo, state: "N")}label: {  Image(systemName: "x.square")}
+                Button{vm.updateUpDown(roundNo: roundNumber, hole: holeNo, state: "Y")}label: {  Image(systemName: "checkmark.square.fill")}
+            case "N":
+                Button{vm.updateUpDown(roundNo: roundNumber, hole: holeNo, state: "N")}label: {  Image(systemName: "x.square.fill")}
+                Button{vm.updateUpDown(roundNo: roundNumber, hole: holeNo, state: "Y")}label: {  Image(systemName: "checkmark.square")}
+            default:
+                Button{vm.updateUpDown(roundNo: roundNumber, hole: holeNo, state: "N")}label: {  Image(systemName: "x.square")}
+                Button{vm.updateUpDown(roundNo: roundNumber, hole: holeNo, state: "Y")}label: {  Image(systemName: "checkmark.square")}
+            }
+        }.font(.title2).buttonStyle(.borderless)
+    }
+}
+
+
 
 struct HoleSelectView: View {
     @EnvironmentObject var vm: ViewModel

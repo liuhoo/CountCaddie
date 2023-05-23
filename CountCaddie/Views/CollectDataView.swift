@@ -16,11 +16,11 @@ struct CollectDataView: View {
     
     var body: some View {
         let element = vm.numberRounds()-1
-//        let holes = vm.getHoles(index: curRound)
         let currRound = vm.getRound(index: element)
         var holeNo = vm.getCurrHole(index: element)
         var currHole = currRound.holes[holeNo]
         var numPutts = currHole.Putts.count
+        var currentScore = 0
         VStack(alignment: .center, spacing:0){
             ZStack{
 
@@ -35,18 +35,38 @@ struct CollectDataView: View {
             }.frame(maxHeight: UIScreen.main.bounds.size.height/4)
             
             List{
+//                HStack(){
+//
+//                    Text("Current Score")
+//                    Spacer()
+//                    ForEach(vm.getHoles(index: element)) {hole in
+//                        vm.getRound(index: element).totScore += 1
+//                    }
+//                }
                 HStack{
-                    Stepper("Par: \(ParStepper)", value: $ParStepper)
+                    Stepper{Text("Par: \(currHole.Score)")} onIncrement: {
+                        vm.incrementScore(index: element, hole: holeNo)
+                        print(currHole.Score)
+                    } onDecrement: {
+                        vm.decrementScore(index: element, hole: holeNo)
+                        if vm.getScore(index: element, hole: holeNo) < 0 { vm.incrementScore(index: element, hole: holeNo)}
+                        print(currHole.Score)
+                    }
                 }
                 HStack{
-                    Stepper("Score: \(ScoreStepper)", value: $ScoreStepper)
+                    Stepper{Text("Score: \(currHole.Par)")} onIncrement: {
+                        vm.incrementPar(index: element, hole: holeNo)
+                    } onDecrement: {
+                        vm.decrementPar(index: element, hole: holeNo)
+                        if vm.getPar(index: element, hole: holeNo) < 0 { vm.incrementPar(index: element, hole: holeNo)}
+                    }
                 }
                 HStack{
                     Text("Fairway?").font(.body)
                     Spacer()
-                    Button{}label: {  Image(systemName: "arrow.up.left.circle")}
-                    Button{}label: {  Image(systemName: "checkmark.circle")}
-                    Button{}label: {  Image(systemName: "arrow.up.right.circle")}
+                    Button{vm.updateFairway(index: element, hole: holeNo, state: "L")}label: {  Image(systemName: "arrow.up.left.circle")}
+                    Button{vm.updateFairway(index: element, hole: holeNo, state: "H")}label: {  Image(systemName: "checkmark.circle")}
+                    Button{vm.updateFairway(index: element, hole: holeNo, state: "R")}label: {  Image(systemName: "arrow.up.right.circle")}
                 }.font(.title2)
                 HStack{
                     Text("Up and Down?").font(.body)

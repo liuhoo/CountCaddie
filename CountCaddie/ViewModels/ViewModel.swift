@@ -45,7 +45,7 @@ class ViewModel: ObservableObject{
     }
     
    
-    func addHole(round: Int, id: Int, FairwayHit: Bool, GreenHit: String, Score: Int){
+    func addHole(round: Int, id: Int, FairwayHit: String, GreenHit: Bool, Score: Int){
         let newHole = ScorecardModel.HoleModel(id: id, FairwayHit: FairwayHit, GreenHit: GreenHit, Score: Score)
         roundList[round].holes.append(newHole)
     }
@@ -57,6 +57,40 @@ class ViewModel: ObservableObject{
     func updateCurrHole(index: Int, value: Int) -> Void{
         roundList[index].currHole = value-1
     }
+    
+    func incrementScore(index: Int, hole: Int) -> Void{
+        roundList[index].holes[hole].Score += 1
+    }
+    func decrementScore(index: Int, hole: Int) -> Void{
+        roundList[index].holes[hole].Score -= 1
+    }
+    
+    func getScore(index: Int, hole: Int) -> Int{
+        return roundList[index].holes[hole].Score
+    }
+    
+    func incrementPar(index: Int, hole: Int) -> Void{
+        roundList[index].holes[hole].Par += 1
+    }
+    func decrementPar(index: Int, hole: Int) -> Void{
+        roundList[index].holes[hole].Par -= 1
+    }
+    
+    func getPar(index: Int, hole: Int) -> Int{
+        return roundList[index].holes[hole].Par
+    }
+    
+    
+    
+    func updateFairway(index: Int, hole: Int, state: String) -> Void{
+        roundList[index].holes[hole].FairwayHit = state
+    }
+    func getFairway(index: Int, hole: Int) -> String{
+        return roundList[index].holes[hole].FairwayHit ?? ""
+    }
+    
+    
+    
     
     func addPutt(round: Int, hole: Int, identification: Int){
         let newPutt = ScorecardModel.HoleModel.Putt(id: identification)

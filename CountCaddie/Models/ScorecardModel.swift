@@ -12,7 +12,7 @@ struct ScorecardModel: Hashable, Codable, Identifiable {
     var id: String
     var description: String
     var holes = [HoleModel]()
-    
+    var currHole: Int = 0
     struct HoleModel: Hashable, Codable, Identifiable{
         var id: Int
         var FairwayHit: Bool?

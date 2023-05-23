@@ -16,8 +16,8 @@ struct CollectDataView: View {
     
     var body: some View {
         let element = vm.numberRounds()-1
-        let currRound = vm.getRound(index: element)
-        var holeNo = vm.getCurrHole(index: element)
+        let currRound = vm.getRound(roundNo: element)
+        var holeNo = vm.getCurrHole(roundNo: element)
         var currHole = currRound.holes[holeNo]
         var numPutts = currHole.Putts.count
         var currentScore = 0
@@ -39,34 +39,34 @@ struct CollectDataView: View {
 //
 //                    Text("Current Score")
 //                    Spacer()
-//                    ForEach(vm.getHoles(index: element)) {hole in
+//                    ForEach(vm.getHoles(roundNo: element)) {hole in
 //                        vm.getRound(index: element).totScore += 1
 //                    }
 //                }
                 HStack{
                     Stepper{Text("Par: \(currHole.Score)")} onIncrement: {
-                        vm.incrementScore(index: element, hole: holeNo)
+                        vm.incrementScore(roundNo: element, hole: holeNo)
                         print(currHole.Score)
                     } onDecrement: {
-                        vm.decrementScore(index: element, hole: holeNo)
-                        if vm.getScore(index: element, hole: holeNo) < 0 { vm.incrementScore(index: element, hole: holeNo)}
+                        vm.decrementScore(roundNo: element, hole: holeNo)
+                        if vm.getScore(roundNo: element, hole: holeNo) < 0 { vm.incrementScore(roundNo: element, hole: holeNo)}
                         print(currHole.Score)
                     }
                 }
                 HStack{
                     Stepper{Text("Score: \(currHole.Par)")} onIncrement: {
-                        vm.incrementPar(index: element, hole: holeNo)
+                        vm.incrementPar(roundNo: element, hole: holeNo)
                     } onDecrement: {
-                        vm.decrementPar(index: element, hole: holeNo)
-                        if vm.getPar(index: element, hole: holeNo) < 0 { vm.incrementPar(index: element, hole: holeNo)}
+                        vm.decrementPar(roundNo: element, hole: holeNo)
+                        if vm.getPar(roundNo: element, hole: holeNo) < 0 { vm.incrementPar(roundNo : element, hole: holeNo)}
                     }
                 }
                 HStack{
                     Text("Fairway?").font(.body)
                     Spacer()
-                    Button{vm.updateFairway(index: element, hole: holeNo, state: "L")}label: {  Image(systemName: "arrow.up.left.circle")}
-                    Button{vm.updateFairway(index: element, hole: holeNo, state: "H")}label: {  Image(systemName: "checkmark.circle")}
-                    Button{vm.updateFairway(index: element, hole: holeNo, state: "R")}label: {  Image(systemName: "arrow.up.right.circle")}
+                    Button{vm.updateFairway(roundNo: element, hole: holeNo, state: "L")}label: {  Image(systemName: "arrow.up.left.circle")}
+                    Button{vm.updateFairway(roundNo: element, hole: holeNo, state: "H")}label: {  Image(systemName: "checkmark.circle")}
+                    Button{vm.updateFairway(roundNo: element, hole: holeNo, state: "R")}label: {  Image(systemName: "arrow.up.right.circle")}
                 }.font(.title2)
                 HStack{
                     Text("Up and Down?").font(.body)
@@ -109,7 +109,7 @@ struct CollectDataView: View {
                 HStack{
                     Spacer()
                     Button{
-                        vm.addPutt(round: element, hole: holeNo, identification: numPutts )
+                        vm.addPutt(roundNo: element, hole: holeNo, identification: numPutts )
                         numPutts = numPutts + 1
                     }label: {  HStack{Text("Add Putt");Image(systemName: "plus.rectangle")}}
                     Spacer()
@@ -133,7 +133,7 @@ struct HoleSelectView: View {
                 RoundedRectangle(cornerRadius: 10).stroke()
             }
             Button{
-                vm.updateCurrHole(index: index, value: HoleNumber)
+                vm.updateCurrHole(roundNo: index, value: HoleNumber)
             }label: {Text("\(HoleNumber)").font(.body)}
         }.padding(.horizontal)
     }

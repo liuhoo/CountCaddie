@@ -11,7 +11,7 @@ struct CollectDataView: View {
     @State var ParStepper: Int = 0
     @State var ScoreStepper: Int = 0
     @EnvironmentObject var vm: ViewModel
-   
+    @EnvironmentObject var appState: AppState
 //    var curRound: Int = 0
     
     
@@ -23,6 +23,9 @@ struct CollectDataView: View {
         var numPutts = currHole.Putts.count
         var currentScore = 0
         VStack(alignment: .center, spacing:0){
+            Button("GO HOME"){
+                appState.popToRoot()
+            }.buttonStyle(.borderedProminent)
             ZStack{
 
                 LazyVGrid(columns: [GridItem(),GridItem(),GridItem()]){
@@ -44,6 +47,7 @@ struct CollectDataView: View {
 //                        vm.getRound(index: element).totScore += 1
 //                    }
 //                }
+               
                 HStack{
                     Stepper{Text("Par: \(currHole.Score)")} onIncrement: {
                         vm.incrementScore(roundNo: element, hole: holeNo)

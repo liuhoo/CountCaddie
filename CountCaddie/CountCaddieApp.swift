@@ -7,16 +7,21 @@
 
 import SwiftUI
 
+
+
+
 @main
 struct CountCaddieApp: App {
     @StateObject var vm : ViewModel = ViewModel()
+    @StateObject var appState: AppState = AppState()
     var body: some Scene {
         WindowGroup {
-            NavigationView{
+            NavigationStack(path: $appState.path){
                 HomePageView()
-            }.environmentObject(vm)
+            }.environmentObject(vm).environmentObject(appState)
         }
     }
 }
+
 
 

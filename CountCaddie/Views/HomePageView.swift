@@ -7,22 +7,52 @@
 
 import SwiftUI
 
+
+class AppState: ObservableObject {
+    @Published var path = NavigationPath()
+    
+    func popToRoot(){
+        path.removeLast(path.count)
+    }
+}
+
 struct HomePageView: View {
     @EnvironmentObject var vm: ViewModel
+    @EnvironmentObject var appState: AppState
     var body: some View {
         VStack {
 //            ForEach(vm.roundList[0..<vm.numberRounds()],  id: \.self) { i in
 //                Text("HERE WE ARE AT\(i.id)")
 //            }
-            NavigationLink(destination: intermediateView()){NewRoundView()}.isDetailLink(false).navigationTitle("Count Caddie")
-                
-//                .simultaneousGesture(TapGesture().onEnded{
-//                vm.addRound(value: "BHCC 10/18", desc: "HERE")
-//            })
-            NavigationLink(destination: RoundCollectionView()){StatisticView()}.navigationTitle("Count Caddie")
+//            NavigationLink(destination: intermediateView()){NewRoundView()}.navigationTitle("Count Caddie")
+//            NavigationLink(destination: RoundCollectionView()){StatisticView()}.navigationTitle("Count Caddie")
+            
+            NavigationLink(value:"intermediateView"){
+                NewRoundView()
+            }
+            NavigationLink(value:"statisticView"){
+               StatisticView()
+            }
+        }.navigationDestination(for: String.self){ viewItem in
+            selectView(item: viewItem)
+            
+        }.navigationTitle("Pocket Caddie")
+    }
+    
+    func selectView(item: String) ->  AnyView{
+        switch item{
+        case "intermediateView":
+            return AnyView(intermediateView())
+        case "statisticView":
+            return AnyView(RoundCollectionView())
+        default:
+            return AnyView(Text("Error"))
         }
+        
     }
 }
+
+
 
 struct StatisticView: View {
     var body: some View {
@@ -66,7 +96,7 @@ struct BeginRoundView: View {
 
 
 
-struct intermediateView: View{
+struct intermediateView:  View{
 //  THIS HAS BEEN AN ONGOING ISSUE BECAUSE OF THE UI TEXTFIELD. This is the log error that it produces, based off stack overflow this is a bug on apples end.
 //    [LayoutConstraints] Unable to simultaneously satisfy constraints.
 //        Probably at least one of the constraints in the following list is one you don't want.

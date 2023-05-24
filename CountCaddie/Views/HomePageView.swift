@@ -14,8 +14,7 @@ struct HomePageView: View {
 //            ForEach(vm.roundList[0..<vm.numberRounds()],  id: \.self) { i in
 //                Text("HERE WE ARE AT\(i.id)")
 //            }
-            
-            NavigationLink(destination: intermediateView()){NewRoundView()}.navigationTitle("Count Caddie")
+            NavigationLink(destination: intermediateView()){NewRoundView()}.isDetailLink(false).navigationTitle("Count Caddie")
                 
 //                .simultaneousGesture(TapGesture().onEnded{
 //                vm.addRound(value: "BHCC 10/18", desc: "HERE")

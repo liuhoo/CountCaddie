@@ -11,6 +11,7 @@ struct CollectDataView: View {
     @State var ParStepper: Int = 0
     @State var ScoreStepper: Int = 0
     @EnvironmentObject var vm: ViewModel
+   
 //    var curRound: Int = 0
     
     
@@ -205,8 +206,3 @@ struct HoleSelectView: View {
     }
 }
 
-struct CollectData_Previews: PreviewProvider {
-    static var previews: some View {
-        CollectDataView()
-    }
-}

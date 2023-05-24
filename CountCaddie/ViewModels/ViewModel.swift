@@ -61,6 +61,7 @@ class ViewModel: ObservableObject{
     func incrementScore(roundNo index: Int, hole: Int) -> Void{
         roundList[index].holes[hole].Score += 1
     }
+    
     func decrementScore(roundNo index: Int, hole: Int) -> Void{
         roundList[index].holes[hole].Score -= 1
     }
@@ -72,6 +73,7 @@ class ViewModel: ObservableObject{
     func incrementPar(roundNo index: Int, hole: Int) -> Void{
         roundList[index].holes[hole].Par += 1
     }
+    
     func decrementPar(roundNo index: Int, hole: Int) -> Void{
         roundList[index].holes[hole].Par -= 1
     }
@@ -79,26 +81,41 @@ class ViewModel: ObservableObject{
     func getPar(roundNo index: Int, hole: Int) -> Int{
         return roundList[index].holes[hole].Par
     }
-    
-    
-    
+
     func updateFairway(roundNo index: Int, hole: Int, state: String) -> Void{
-        roundList[index].holes[hole].FairwayHit = state
+        if state == roundList[index].holes[hole].FairwayHit{
+            roundList[index].holes[hole].FairwayHit = ""
+        } else {
+            roundList[index].holes[hole].FairwayHit = state
+        }
+        
     }
+    
     func getFairway(roundNo index: Int, hole: Int) -> String{
         return roundList[index].holes[hole].FairwayHit ?? ""
     }
     
     func updateGreenHit(roundNo index: Int, hole: Int, state: String) -> Void{
-        roundList[index].holes[hole].GreenHit = state
+        if state == roundList[index].holes[hole].GreenHit{
+            roundList[index].holes[hole].GreenHit = ""
+        } else {
+            roundList[index].holes[hole].GreenHit = state
+        }
+        
     }
+    
     func getGreenHit(roundNo index: Int, hole: Int) -> String{
         return roundList[index].holes[hole].GreenHit ?? ""
     }
     
     func updateUpDown(roundNo index: Int, hole: Int, state: String) -> Void{
-        roundList[index].holes[hole].UpDown = state
+        if state == roundList[index].holes[hole].UpDown{
+            roundList[index].holes[hole].UpDown = ""
+        } else {
+            roundList[index].holes[hole].UpDown = state
+        }
     }
+    
     func getUpDown(roundNo index: Int, hole: Int) -> String{
         return roundList[index].holes[hole].UpDown ?? ""
     }
@@ -110,6 +127,10 @@ class ViewModel: ObservableObject{
         let newPutt = ScorecardModel.HoleModel.Putt(id: identification)
         roundList[index].holes[hole].Putts.append(newPutt)
     }
+//    IMPLEMENT THIS
+//    func deletePutt(roundNo index: Int, hole: Int, identification: Int){
+//
+//    }
     
     func addRound(value: String, desc: String, noholes: Int) -> Void {
         var newRound = ScorecardModel(id: value , description: desc, holes: [])

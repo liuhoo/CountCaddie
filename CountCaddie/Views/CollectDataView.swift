@@ -23,9 +23,6 @@ struct CollectDataView: View {
         var numPutts = currHole.Putts.count
         var currentScore = 0
         VStack(alignment: .center, spacing:0){
-            Button("GO HOME"){
-                appState.popToRoot()
-            }.buttonStyle(.borderedProminent)
             ZStack{
 
                 LazyVGrid(columns: [GridItem(),GridItem(),GridItem()]){
@@ -67,8 +64,8 @@ struct CollectDataView: View {
                     }
                 }
                 FairwayButton(roundNumber: element, holeNo: holeNo)
-                UpDownButton(roundNumber: element, holeNo: holeNo)
                 GreenHitButton(roundNumber: element, holeNo: holeNo)
+                UpDownButton(roundNumber: element, holeNo: holeNo)
                 ForEach(vm.getHole(index: element, holeNo: holeNo).Putts) {putt in
                     
                     HStack{
@@ -110,6 +107,31 @@ struct CollectDataView: View {
                 }.font(.title2)
             }
             .padding()
+            if holeNo == currRound.holes.count-1{
+                HStack{
+                    Button("Previous Hole"){
+                        vm.updateCurrHole(roundNo: element, value: holeNo - 1)
+                    }.buttonStyle(.borderedProminent)
+                    Button("Finish Round"){
+                        appState.popToRoot()
+                    }.buttonStyle(.borderedProminent)
+                }
+            } else if holeNo == 0 {
+                Button("Next Hole"){
+                    vm.updateCurrHole(roundNo: element, value: holeNo + 1)
+                }.buttonStyle(.borderedProminent)
+            } else{
+                HStack{
+                    Button("Previous Hole"){
+                        vm.updateCurrHole(roundNo: element, value: holeNo - 1)
+                    }.buttonStyle(.borderedProminent)
+                    Button("Next Hole"){
+                        vm.updateCurrHole(roundNo: element, value: holeNo + 1)
+                    }.buttonStyle(.borderedProminent)
+                }
+                
+            }
+            
         }
     }
 }
@@ -204,7 +226,7 @@ struct HoleSelectView: View {
                 RoundedRectangle(cornerRadius: 10).stroke()
             }
             Button{
-                vm.updateCurrHole(roundNo: index, value: HoleNumber)
+                vm.updateCurrHole(roundNo: index, value: HoleNumber-1)
             }label: {Text("\(HoleNumber)").font(.body)}
         }.padding(.horizontal)
     }

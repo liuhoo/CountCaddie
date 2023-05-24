@@ -8,6 +8,7 @@
 import Foundation
 
 
+
 class ViewModel: ObservableObject{
     
     @Published var roundList: [ScorecardModel] = []
@@ -55,7 +56,7 @@ class ViewModel: ObservableObject{
     }
     
     func updateCurrHole(roundNo index: Int, value: Int) -> Void{
-        roundList[index].currHole = value-1
+        roundList[index].currHole = value
     }
     
     func incrementScore(roundNo index: Int, hole: Int) -> Void{

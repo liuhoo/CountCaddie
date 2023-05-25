@@ -77,8 +77,8 @@ struct CollectDataView: View {
 
                         Text("|")
 
-                        Button{}label: {  Image(systemName: "arrow.up.left.circle")}
-                        Button{}label: {  Image(systemName: "arrow.up.right.circle")}
+                        Button{}label: {  Image(systemName: "arrow.left.circle")}
+                        Button{}label: {  Image(systemName: "arrow.right.circle")}
                         Button{}label: {  Image(systemName: "arrow.up.circle")}
                         Button{}label: {  Image(systemName: "arrow.down.circle")}
                     }.font(.title3)
@@ -92,8 +92,8 @@ struct CollectDataView: View {
                     
                     Text("|")
                   
-                    Button{}label: {  Image(systemName: "arrow.up.left.circle")}
-                    Button{}label: {  Image(systemName: "arrow.up.right.circle")}
+                    Button{}label: {  Image(systemName: "arrow.left.circle")}
+                    Button{}label: {  Image(systemName: "arrow.right.circle")}
                     Button{}label: {  Image(systemName: "arrow.up.circle")}
                     Button{}label: {  Image(systemName: "arrow.down.circle")}
                 }.font(.title3)

@@ -22,17 +22,17 @@ struct RoundCollectionView: View {
 //        }
 //    }
     
-    @State var rounds: [ScorecardModel] = [ScorecardModel(id: "Maderas CC 10/17", description: "Practice Round")]
+    @EnvironmentObject var vm: ViewModel
 //    [Hole(id: 1, FairwayHit: true, GreenHit: true, Putts: 2, Score: 4, Par: 4), Hole(id: 2,FairwayHit: false, GreenHit: false, Putts: 1, Score: 4, Par: 4), Hole(id: 3,FairwayHit: true, GreenHit: true, Putts: 2, Score: 4, Par: 4), Hole(id: 4,FairwayHit: true, GreenHit: true, Putts: 2, Score: 4, Par: 4)]
     var body: some View {
-        List() { ForEach(rounds) {hole in
+        List() { ForEach(vm.roundList) {round in
             
             NavigationLink {
-                Text("Round Number: \(rounds[0].id)")
-                Text("Description: \(rounds[0].description)")
+                Text("Round Name: \(round.id)")
+                Text("Description: \(round.description)")
                 
             } label: {
-                Text("\(rounds[0].id)")
+                Text("\(round.id)")
             }.navigationTitle("Completed Rounds")
         }
         

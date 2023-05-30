@@ -1,6 +1,6 @@
 # CountCaddie
 
-This is a iOS application to keep track of simple and advanced score statistics on the golf course. 
+This is a iOS application to keep track of simple and advanced score statistics on the golf course. Currently runs on UserDefaults as temporary database. 
 
 ## Inspiration
 
